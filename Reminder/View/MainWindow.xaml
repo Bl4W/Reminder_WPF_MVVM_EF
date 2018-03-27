@@ -1,0 +1,84 @@
+﻿<Window x:Class="Reminder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:Reminder.Properties"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="{x:Static properties:Resources.Title}" Height="350" Width="525">
+    <Grid>
+        <!--#region Window definition-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--#endregion-->
+
+        <!--#region Top window-->
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <Label Content="{x:Static properties:Resources.Title}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom">
+            <Label Content="{x:Static properties:Resources.NotifyList}"/>
+        </StackPanel>
+        <!--#endregion-->
+        
+        <!--#region Left window-->
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Label Content="{x:Static properties:Resources.DateTime}"/>
+            <xctk:DateTimePicker TimeFormat="FullDateTime" Text="{Binding DateTime}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="2">
+            <Label Content="{x:Static properties:Resources.Info}"/>
+            <TextBox Text="{Binding Text, Mode=TwoWay}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="3">
+            <Label Content="{x:Static properties:Resources.Interval}"/>
+            <xctk:IntegerUpDown Minimum="0" DefaultValue="0" Text="{Binding Interval, Mode=TwoWay}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="4">
+            <Label Content="{x:Static properties:Resources.Repeats}"/>
+            <xctk:IntegerUpDown Minimum="0" DefaultValue="0" Text="{Binding Repeats, Mode=TwoWay}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="5">
+            <Button Margin="10" Content="{x:Static properties:Resources.AddNotify}" Click="AddNotify_Click"/>
+        </StackPanel>
+        <!--#endregion-->
+        
+        <!--#region Right window-->
+        <DockPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="4">
+            <ListBox>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>  <!--Date and Time-->
+                                <ColumnDefinition Width="5*"/>  <!--Text about notify-->
+                                <ColumnDefinition Width="*"/>   <!--Interval-->
+                                <ColumnDefinition Width="*"/>   <!--Repeatings-->
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Info, Mode=TwoWay}"></TextBlock>
+                            <TextBlock Text="{Binding DateTime, Mode=TwoWay}"></TextBlock>
+                            <TextBlock Text="{Binding Interval, Mode=TwoWay}"></TextBlock>
+                            <TextBlock Text="{Binding Repeats, Mode=TwoWay}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <!--#endregion-->
+    </Grid>
+</Window>
