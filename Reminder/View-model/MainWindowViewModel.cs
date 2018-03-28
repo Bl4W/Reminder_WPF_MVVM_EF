@@ -2,13 +2,15 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Reminder.Database;
+using System.Windows.Controls;
 
 namespace Reminder.View_model
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         #region Data
-        private ObservableCollection<NotifyData> addItem;
+        private ObservableCollection<Notify> notifyData;
         private int id;
         private string info;
         private DateTime dateTime;
@@ -17,6 +19,7 @@ namespace Reminder.View_model
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
+        DatabaseLogic database = new DatabaseLogic();
 
         #region Properties
         public string Info
@@ -78,11 +81,19 @@ namespace Reminder.View_model
 
         public void AddNotify()
         {
-            addItem = new ObservableCollection<NotifyData>
-            {
-                new NotifyData(Id, Info, Interval, DateTime, Repeats)
-            };
+            database.SaveNotify(Id, Info, Interval, DateTime, Repeats);
         }
+
+        public void Minimalize(MainWindow main)
+        {
+            main.Hide();
+        }
+
+        public void DeleteItem(ListBox listBox)
+        {
+            listBox.SelectedItems.Remove(listBox.SelectedItem);
+        }
+        
 
         #endregion
     }

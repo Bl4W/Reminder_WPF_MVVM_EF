@@ -8,7 +8,7 @@ namespace Reminder
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainWindowViewModel main = new MainWindowViewModel();
+        MainWindowViewModel mainVM = new MainWindowViewModel();
 
         public MainWindow()
         {
@@ -18,7 +18,17 @@ namespace Reminder
 
         private void AddNotify_Click(object sender, RoutedEventArgs e)
         {
-            main.AddNotify();
+            mainVM.AddNotify();
+        }
+
+        private void Minimalize_Click(object sender, RoutedEventArgs e)
+        {
+            mainVM.Minimalize(this);
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            mainVM.DeleteItem(notifyListBox);
         }
     }
 }

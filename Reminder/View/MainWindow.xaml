@@ -60,7 +60,7 @@
         
         <!--#region Right window-->
         <DockPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="4">
-            <ListBox>
+            <ListBox Name="notifyListBox">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -79,6 +79,10 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
+        <StackPanel Grid.Column="1" Grid.Row="5">
+            <Button Content="{x:Static properties:Resources.DeleteNotify}" Margin="2" Click="Delete_Click"/>
+            <Button Content="{x:Static properties:Resources.Minimalize}" Margin="2" Click="Minimalize_Click"/>
+        </StackPanel>
         <!--#endregion-->
     </Grid>
 </Window>
