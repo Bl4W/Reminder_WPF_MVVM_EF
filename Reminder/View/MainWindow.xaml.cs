@@ -26,9 +26,9 @@ namespace Reminder
             mainVM.Minimalize(this);
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void Remove_Click(object sender, RoutedEventArgs e)
         {
-            mainVM.DeleteItem(notifyListBox);
+            mainVM.RemoveItem();
         }
     }
 }

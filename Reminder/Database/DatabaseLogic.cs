@@ -19,7 +19,20 @@ namespace Reminder.Database
             Notify notify = new Notify(id, info, interval, date, repeats);
 
             database.NotifyData.Add(notify);
-            database.SaveChanges();
+            database.SaveChanges();     //not working, have issue on GitHub
+        }
+
+        public void RemoveNotify(Notify selectedNotify)
+        {
+            try
+            {
+                database.NotifyData.Remove(selectedNotify);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("Exception message: " + ex.ToString() +
+                    "Source: " + ex.Source.ToString());
+            }
         }
     }
 }

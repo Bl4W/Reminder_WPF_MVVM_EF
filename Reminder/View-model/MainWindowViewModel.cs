@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Reminder.Database;
-using System.Windows.Controls;
 
 namespace Reminder.View_model
 {
@@ -11,6 +10,7 @@ namespace Reminder.View_model
     {
         #region Data
         private ObservableCollection<Notify> notifyData;
+        private Notify selectedNotify;
         private int id;
         private string info;
         private DateTime dateTime;
@@ -71,6 +71,26 @@ namespace Reminder.View_model
                 OnPropertyChange();
             }
         }
+
+        public ObservableCollection<Notify> NotifyData
+        {
+            get => notifyData;
+            set
+            {
+                notifyData = value;
+                OnPropertyChange();
+            }
+        }
+
+        public Notify SelectedNotify
+        {
+            get => selectedNotify;
+            set
+            {
+                selectedNotify = value;
+                OnPropertyChange();
+            }
+        }
         #endregion
 
         #region Methods
@@ -89,12 +109,11 @@ namespace Reminder.View_model
             main.Hide();
         }
 
-        public void DeleteItem(ListBox listBox)
+        public void RemoveItem()
         {
-            listBox.SelectedItems.Remove(listBox.SelectedItem);
+            database.RemoveNotify(SelectedNotify);
         }
         
-
         #endregion
     }
 }

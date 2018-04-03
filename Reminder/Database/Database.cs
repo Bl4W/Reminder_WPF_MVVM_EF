@@ -7,6 +7,5 @@ namespace Reminder.Database
         public Database() : base() { }
 
         public DbSet<Notify> NotifyData { get; set; }
-        
     }
 }

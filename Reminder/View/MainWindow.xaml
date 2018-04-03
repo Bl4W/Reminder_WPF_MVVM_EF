@@ -6,7 +6,7 @@
         xmlns:properties="clr-namespace:Reminder.Properties"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="{x:Static properties:Resources.Title}" Height="350" Width="525">
+        Title="{x:Static properties:Resources.Title}" Height="350" Width="525" MinWidth="525" MinHeight="350">
     <Grid>
         <!--#region Window definition-->
         <Grid.ColumnDefinitions>
@@ -24,8 +24,8 @@
         <!--#endregion-->
 
         <!--#region Top window-->
-        <StackPanel Grid.Column="0" Grid.Row="0">
-            <Label Content="{x:Static properties:Resources.Title}"/>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <Label Content="{x:Static properties:Resources.Title}" HorizontalAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom">
             <Label Content="{x:Static properties:Resources.NotifyList}"/>
@@ -40,7 +40,7 @@
 
         <StackPanel Grid.Column="0" Grid.Row="2">
             <Label Content="{x:Static properties:Resources.Info}"/>
-            <TextBox Text="{Binding Text, Mode=TwoWay}"/>
+            <TextBox Text="{Binding Info, Mode=TwoWay}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="3">
@@ -60,28 +60,14 @@
         
         <!--#region Right window-->
         <DockPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="4">
-            <ListBox Name="notifyListBox">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>  <!--Date and Time-->
-                                <ColumnDefinition Width="5*"/>  <!--Text about notify-->
-                                <ColumnDefinition Width="*"/>   <!--Interval-->
-                                <ColumnDefinition Width="*"/>   <!--Repeatings-->
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Info, Mode=TwoWay}"></TextBlock>
-                            <TextBlock Text="{Binding DateTime, Mode=TwoWay}"></TextBlock>
-                            <TextBlock Text="{Binding Interval, Mode=TwoWay}"></TextBlock>
-                            <TextBlock Text="{Binding Repeats, Mode=TwoWay}"></TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <ListBox Name="notifyListBox"  ItemsSource="{Binding NotifyData}" 
+                     SelectedItem="{Binding SelectedNotify}"/>
         </DockPanel>
         <StackPanel Grid.Column="1" Grid.Row="5">
-            <Button Content="{x:Static properties:Resources.DeleteNotify}" Margin="2" Click="Delete_Click"/>
-            <Button Content="{x:Static properties:Resources.Minimalize}" Margin="2" Click="Minimalize_Click"/>
+            <Button Content="{x:Static properties:Resources.DeleteNotify}" 
+                    Margin="2" Click="Remove_Click"/>
+            <Button Content="{x:Static properties:Resources.Minimalize}" 
+                    Margin="2" Click="Minimalize_Click"/>
         </StackPanel>
         <!--#endregion-->
     </Grid>
